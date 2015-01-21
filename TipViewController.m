@@ -35,7 +35,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self updateView];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(onSettingsButton)];
 }
 
@@ -43,6 +42,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     int defaultIndex = [defaults integerForKey:KEY_DEFAULT_TIP];
     [self.tipControl setSelectedSegmentIndex:defaultIndex];
+    [self updateView];
 }
 
 - (void)didReceiveMemoryWarning {
