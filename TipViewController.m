@@ -7,6 +7,8 @@
 //
 
 #import "TipViewController.h"
+#import "SettingViewController.h"
+#import "Constants.h"
 
 @interface TipViewController ()
 
@@ -17,6 +19,7 @@
 
 - (IBAction)onTap:(id)sender;
 - (void)updateView;
+- (void)onSettingsButton;
 @end
 
 @implementation TipViewController
@@ -33,6 +36,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self updateView];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(onSettingsButton)];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    int defaultIndex = [defaults integerForKey:KEY_DEFAULT_TIP];
+    [self.tipControl setSelectedSegmentIndex:defaultIndex];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,5 +63,9 @@
     float totalAmount = tipAmount + billAmount;
     self.tipLable.text = [NSString stringWithFormat:@"$%0.2f", tipAmount];
     self.totalLable.text = [NSString stringWithFormat:@"$%0.2f", totalAmount];
+}
+
+- (void)onSettingsButton {
+    [self.navigationController pushViewController:[[SettingViewController alloc] init ] animated:YES];
 }
 @end
