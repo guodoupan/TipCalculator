@@ -27,20 +27,18 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        self.title = @"Tip Calculator";
-    }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(onSettingsButton)];
+    [self.tipScroller setScrollEnabled:YES];
+    [self.tipScroller setContentSize:CGSizeMake(500, 100)];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    int defaultIndex = [defaults integerForKey:KEY_DEFAULT_TIP];
+    int defaultIndex = (int)[defaults integerForKey:KEY_DEFAULT_TIP];
     [self.tipControl setSelectedSegmentIndex:defaultIndex];
     [self updateView];
 }
